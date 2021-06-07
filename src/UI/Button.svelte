@@ -1,14 +1,15 @@
 <script>
     export let type = "button";
-    export let caption;
+    // export let caption;
     export let mode = null;
     export let href = null;
+    export let colour = null;
 </script>
 
 {#if href}
-    <a {href}>{caption}</a>
+    <a {href}> <slot /> </a>
 {:else}
-    <button class={mode} {type} on:click="">{caption}</button>
+    <button class="{mode} {colour}" {type} on:click> <slot /> </button>
 {/if}
 
 <style>
@@ -17,7 +18,7 @@
         font: inherit;
         border: 1px solid #cf0056;
         background: #cf0056;
-        padding: 0.5rem 1rem; 
+        padding: 0.5rem 1rem;
         color: white;
         border-radius: 5px;
         box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.26);
