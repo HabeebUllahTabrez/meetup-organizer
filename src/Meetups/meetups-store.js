@@ -19,13 +19,26 @@ const meetups = writable([
         title: "Youtube Fanfest",
         subtitle: "Creators from  all around the world!",
         description:
-            "IN this meetup, we will have get an opportunity to meet your favourite content creator!",
+            "In this meetup, we will have get an opportunity to meet your favourite content creator!",
         imageUrl:
             "https://res.cloudinary.com/dwzmsvp7f/image/fetch/q_75,f_auto,w_1316/https%3A%2F%2Feventimages.insider.in%2Fimage%252Fmain%252FCbDosPFQGCiBH2pKnydn_YTFF_Insider_658x360_event.jpg",
         address:
             "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar,  Bangalore-560016",
         contactEmail: "youtube@fanfest.com",
         isFavourite: false,
+    },
+    {
+        id: "m3",
+        title: "Students Reunion",
+        subtitle: "Do you wanna remember your college days?",
+        description:
+            "In this meetup, you can meet your college friends and get connected and maybe share some sweet memories together!",
+        imageUrl:
+            "https://1.bp.blogspot.com/-UjVD5Zpdb7E/X_aotqi00OI/AAAAAAAABTU/hPWdcnF0e1ANiv7qXAIaCrDHf5VKCuM1QCLcBGAsYHQ/w640-h360/Students_reunion.jpg",
+        address:
+            "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar,  Bangalore-560016",
+        contactEmail: "engineering@college.com",
+        isFavourite: true,
     },
 ]);
 
