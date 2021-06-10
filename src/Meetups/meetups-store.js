@@ -12,7 +12,7 @@ const meetups = writable([
         address:
             "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016",
         contactEmail: "code@test.com",
-        isFavourite: false
+        isFavourite: false,
     },
     {
         id: "m2",
@@ -25,7 +25,7 @@ const meetups = writable([
         address:
             "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar,  Bangalore-560016",
         contactEmail: "youtube@fanfest.com",
-        isFavourite: false
+        isFavourite: false,
     },
 ]);
 
@@ -35,11 +35,25 @@ const customMeetupsStore = {
         const newMeetup = {
             ...meetupData,
             id: Math.random().toString(),
-            isFavourite : false
+            isFavourite: false,
         };
         meetups.update((items) => {
             return [newMeetup, ...items];
-        })
+        });
+    },
+    updateMeetup: (id, meetupData) => {
+        meetups.update((items) => {
+            const meetupIndex = items.findIndex((m) => m.id === id);
+            const updatedMeetup = { ...items[meetupIndex], ...meetupData };
+            const updatedMeetups = [...items];
+            updatedMeetups[meetupIndex] = updatedMeetup;
+            return updatedMeetups;
+        });
+    },
+    removeMeetup: (id) => {
+        meetups.update((items) => {
+            return items.filter(m => m.id !== id);
+        });
     },
     toggleFavourite: (id) => {
         meetups.update((items) => {
@@ -49,8 +63,8 @@ const customMeetupsStore = {
             const updatedMeetups = [...items];
             updatedMeetups[meetupIndex] = updatedMeetup;
             return updatedMeetups;
-        })
-    }
-}
+        });
+    },
+};
 
 export default customMeetupsStore;
