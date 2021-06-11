@@ -113,8 +113,8 @@
                 .then((res) => {
                     if (!res.ok) {
                         throw new Error("An error occured!");
-                        meetups.removeMeetup(id);
                     }
+                    meetups.removeMeetup(id);
                 })
                 .catch((err) => console.log(err));
         dispatch("save");
