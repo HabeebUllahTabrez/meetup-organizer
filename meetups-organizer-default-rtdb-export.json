@@ -1,0 +1,31 @@
+{
+  "meetups" : {
+    "-Mbtfsp0NbwWqunDQUdl" : {
+      "address" : "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar,  Bangalore-560016",
+      "contactEmail" : "engineering@college.com",
+      "description" : "In this meetup, you can meet your college friends and maybe share some sweet memories together!",
+      "imageUrl" : "https://1.bp.blogspot.com/-UjVD5Zpdb7E/X_aotqi00OI/AAAAAAAABTU/hPWdcnF0e1ANiv7qXAIaCrDHf5VKCuM1QCLcBGAsYHQ/w640-h360/Students_reunion.jpg",
+      "isFavourite" : true,
+      "subtitle" : "Do you wanna remember your college days?",
+      "title" : "Students Reunion"
+    },
+    "-Mbtg2YHH3xA0Ueof7WW" : {
+      "address" : "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar,  Bangalore-560016",
+      "contactEmail" : "youtube@fanfest.com",
+      "description" : "In this meetup, we will have get an opportunity to meet your favourite content creator!",
+      "imageUrl" : "https://res.cloudinary.com/dwzmsvp7f/image/fetch/q_75,f_auto,w_1316/https%3A%2F%2Feventimages.insider.in%2Fimage%252Fmain%252FCbDosPFQGCiBH2pKnydn_YTFF_Insider_658x360_event.jpg",
+      "isFavourite" : true,
+      "subtitle" : "Creators from  all around the world!",
+      "title" : "Youtube Fanfest"
+    },
+    "-MbtgEP3xSLE8MzHrZnm" : {
+      "address" : "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar,  Bangalore-560016",
+      "contactEmail" : "code1@test.com",
+      "description" : "In this meetup, we will have some experts who will teach you how to code!",
+      "imageUrl" : "https://www.fluentin3months.com/wp-content/uploads/2018/12/language-meetup.jpg",
+      "isFavourite" : false,
+      "subtitle" : "Learn to code in 2 hours",
+      "title" : "Coding Bootcamp"
+    }
+  }
+}
