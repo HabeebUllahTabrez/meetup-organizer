@@ -2,6 +2,22 @@
 
 ---
 
+# Meetups Organizer
+
+This project is created by following the Svelte course by Academind.
+
+This project uses different svelte components to build this amazing websie.
+
+This projects is used to create, read, update(patch) and delete data related to any event(meetups in this project) from a database and display it to the user.
+
+The database used here is firebase and we use fetch api to talk to the rest client of the database.
+
+There are alose transitions and animations added to this project provided out of the box by svelte to enhance the user experience.
+
+I hope you guys liked it! 
+
+---
+
 # svelte app
 
 This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
