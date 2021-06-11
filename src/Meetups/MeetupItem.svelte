@@ -13,10 +13,31 @@
     export let email;
     export let isFav;
 
+    let isLoading = false;
+
     const dispatch = createEventDispatcher();
 
     function toggleFavourite() {
-        meetups.toggleFavourite(id);
+        isLoading = true;
+        fetch(
+            `https://meetups-organizer-default-rtdb.firebaseio.com/meetups/${id}.json`,
+            {
+                method: "PATCH",
+                body: JSON.stringify({ isFavourite: !isFav }),
+                headers: { "Content-Type": "application/json" },
+            }
+        )
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("An error occured!");
+                }
+                isLoading = false;
+                meetups.toggleFavourite(id);
+            })
+            .catch((err) => {
+                console.log(err);
+                isLoading = false;
+            });
     }
 </script>
 
@@ -38,15 +59,23 @@
         <p>{description}</p>
     </div>
     <footer>
-        <Button mode="outline" on:click={() => dispatch("edit", id)}>Edit</Button>
-        <Button
-            mode="outline"
-            colour={isFav ? null : "success"}
-            on:click={toggleFavourite}
+        <Button mode="outline" on:click={() => dispatch("edit", id)}
+            >Edit</Button
         >
-            {isFav ? "Unfavourite" : "Favourite"}
-        </Button>
-        <Button on:click={() => dispatch("showdetails", id)}>Show Details</Button>
+        {#if isLoading}
+            <span>Changing..</span>
+        {:else}
+            <Button
+                mode="outline"
+                colour={isFav ? null : "success"}
+                on:click={toggleFavourite}
+            >
+                {isFav ? "Unfavourite" : "Favourite"}
+            </Button>
+        {/if}
+        <Button on:click={() => dispatch("showdetails", id)}
+            >Show Details</Button
+        >
     </footer>
 </article>
 
@@ -81,13 +110,6 @@
         font-family: "Roboto Slab", sans-serif;
     }
 
-    h1.is-favorite {
-        background: #01a129;
-        color: white;
-        padding: 0 0.5rem;
-        border-radius: 5px;
-    }
-
     h2 {
         font-size: 1rem;
         color: #808080;
@@ -101,6 +123,10 @@
 
     div {
         text-align: right;
+    }
+
+    span {
+        margin: 1rem;
     }
 
     .content {

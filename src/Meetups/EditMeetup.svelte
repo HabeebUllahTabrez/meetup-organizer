@@ -15,9 +15,9 @@
     let address = "";
     let email = "";
 
-    if(id) {
-        const unsubscribe = meetups.subscribe(items => {
-            const selectedMeetup = items.find(i => i.id === id);
+    if (id) {
+        const unsubscribe = meetups.subscribe((items) => {
+            const selectedMeetup = items.find((i) => i.id === id);
             title = selectedMeetup.title;
             subtitle = selectedMeetup.subtitle;
             imageUrl = selectedMeetup.imageUrl;
@@ -37,12 +37,17 @@
     $: descriptionValid = !isEmpty(description);
     $: addressValid = !isEmpty(address);
     $: emailValid = isValidEmail(email);
-    $: isFormValid = titleValid && subtitleValid && imageUrlValid && descriptionValid && addressValid && emailValid;
-    
+    $: isFormValid =
+        titleValid &&
+        subtitleValid &&
+        imageUrlValid &&
+        descriptionValid &&
+        addressValid &&
+        emailValid;
+
     const dispatch = createEventDispatcher();
-    
+
     function submitForm() {
-        
         const meetupData = {
             title,
             subtitle,
@@ -52,17 +57,66 @@
             contactEmail: email,
         };
 
-        if(id) {
-            meetups.updateMeetup(id, meetupData);
+        if (id) {
+            fetch(
+                `https://meetups-organizer-default-rtdb.firebaseio.com/meetups/${id}.json`,
+                {
+                    method: "PATCH",
+                    body: JSON.stringify(meetupData),
+                    headers: { "Content-Type": "application/json" },
+                }
+            )
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error("An error occured!");
+                    }
+                    meetups.updateMeetup(id, meetupData);
+                })
+                .catch((err) => console.log(err));
         } else {
-            meetups.addMeetup(meetupData);
+            fetch(
+                "https://meetups-organizer-default-rtdb.firebaseio.com/meetups.json",
+                {
+                    method: "POST",
+                    body: JSON.stringify({ ...meetupData, isFavourite: false }),
+                    headers: { "Content-Type": "application/json" },
+                }
+            )
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error("An error occured!");
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    meetups.addMeetup({
+                        ...meetupData,
+                        isFavourite: false,
+                        id: data.name,
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
 
         dispatch("save");
     }
 
     function deleteMeetup() {
-        meetups.removeMeetup(id);
+        fetch(
+                `https://meetups-organizer-default-rtdb.firebaseio.com/meetups/${id}.json`,
+                {
+                    method: "DELETE",
+                }
+            )
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error("An error occured!");
+                        meetups.removeMeetup(id);
+                    }
+                })
+                .catch((err) => console.log(err));
         dispatch("save");
     }
 
@@ -131,7 +185,9 @@
     </form>
     <div slot="footer">
         <Button type="button" mode="outline" on:click={cancel}>Cancel</Button>
-        <Button type="button" on:click={submitForm} disabled={!isFormValid}>Save</Button>
+        <Button type="button" on:click={submitForm} disabled={!isFormValid}
+            >Save</Button
+        >
         <Button on:click={deleteMeetup}>Delete</Button>
     </div>
 </Modal>
